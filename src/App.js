@@ -1,47 +1,65 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import apikey from './config'
-import PhotoContainer from './components/PhotoContainer';
+import {
+  BrowserRouter,
+} from 'react-router-dom';
 import SearchForm from './components/SearchForm';
+import Nav from './components/Nav';
 
 class App extends Component {
-  state = {
+  state ={
     photos: [],
-    photoUrls:[],
-    loading: true
+    loading: true,
+    results: false,
+    query: 'cat'
   }
 
   componentDidMount() {
-    this.performSearch();
+    this.performSearch(this.state.query);
   }
 
-  performSearch = (query='sunsets') => {
+  performSearch = (query) => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apikey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(( response ) => {
       this.setState({
         photos: response.data.photos.photo,
-        photoUrls: `https://farm${response.data.photos.photo[0].farm}.staticflickr.com/${response.data.photos.photo[0].server}/${response.data.photos.photo[0].id}_${response.data.photos.photo[0].secret}_o.jpg)`,
         loading: false
       })
+      this.checkResults();
     })
     .catch( ( error )=> {
       console.log('Error parsing data', error);
     })
   }
 
+  checkResults = () => {
+    if(this.state.photos.length > 0) {
+      this.setState({
+        results: true
+      })
+    }
+  }
+
+  onSearchChange = e => {
+    this.setState({ query: e.target.value });
+  }
+    
+  handleSubmit = e => {
+    e.preventDefault();
+    this.onSearch(this.state.query.value);
+    e.currentTarget.reset();
+  }
+
   render() {
-    console.log(this.state.photos);
-    console.log(this.state.photoUrls);
-    return (
-      <div className="App">
-        <SearchForm />
-        {
-            (this.state.loading)
-              ?<p>LOADING...</p>
-              : <PhotoContainer  />
-          }
-        
-      </div>
+    return  (
+          <BrowserRouter>
+            <div className="App">
+              <SearchForm query={this.state.query} onChange={this.onSearchChange} handleSubmit = {this.handleSubmit}/>
+              <Nav query={this.state.query} photos={ this.state.photos } loading={this.state.loading}
+    results={this.state.results} />
+            </div>
+          </BrowserRouter>
     );
   }
 }

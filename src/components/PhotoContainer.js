@@ -1,21 +1,29 @@
-import React, { Component } from 'react';
-// import NotFound from './NotFound';
+import React from 'react';
+import Photo from './Photo';
+import NotFound from './NotFound';
 
-class PhotoContatainer extends Component {
-  // const results = props.data;
-  // let photos;
-  // if(results.length > 0) {
-  //   photos= results.map(photo => 
-  //   <photo url={photo.images.fixed_height.url} key={photo.id}/>)
-  // } else {
-  //   photos=<NotFound />
-  // }
-
-  render() {
-    return (
-      <div></div>
+const PhotoContainer =props => (
+      <div className="photo-container">
+          {
+            (props.loading)
+              ?<p>LOADING...</p>
+              : (props.results)? <h2>Results</h2>:<NotFound />
+          }
+        <ul>
+         {props.photos.map((photo, index) =>
+          <Photo 
+            {...photo}
+            key = {photo.id.toString()}
+            photoId = {photo.id}
+            owner = {photo.owner}
+            secret = {photo.secret}
+            server = {photo.server}
+            farm = {photo.farm}
+            index={index}
+          />
+         )}
+        </ul>
+      </div>
     )
-  }
-}
 
-export default PhotoContatainer;
+export default PhotoContainer;
