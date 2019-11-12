@@ -3,16 +3,27 @@ import axios from 'axios';
 import apikey from './config'
 import {
   BrowserRouter,
+  Redirect,
+  Route,
+  Switch
 } from 'react-router-dom';
 import SearchForm from './components/SearchForm';
 import Nav from './components/Nav';
+import PhotoContainer from './components/PhotoContainer';
+import Error from './components/Error';
+import NotFound from './components/NotFound';
 
 class App extends Component {
   state ={
     photos: [],
     loading: true,
     results: false,
-    query: 'cat'
+    query: '',
+    searchTerms: [
+      'moma',
+      'louvre',
+      'tate modern'
+    ]
   }
 
   componentDidMount() {
@@ -38,28 +49,69 @@ class App extends Component {
       this.setState({
         results: true
       })
+    } else {
+      this.setState({
+        results:false
+      })
     }
   }
 
   onSearchChange = e => {
-    this.setState({ query: e.target.value });
+    this.setState({ query: e.target.value } );
   }
-    
-  handleSubmit = e => {
+
+  handleNavClick = e => {
     e.preventDefault();
-    this.onSearch(this.state.query.value);
-    e.currentTarget.reset();
+    this.setState({ query: e.target.text })
+    this.performSearch(e.target.text);
   }
 
   render() {
     return  (
-          <BrowserRouter>
-            <div className="App">
-              <SearchForm query={this.state.query} onChange={this.onSearchChange} handleSubmit = {this.handleSubmit}/>
-              <Nav query={this.state.query} photos={ this.state.photos } loading={this.state.loading}
-    results={this.state.results} />
-            </div>
-          </BrowserRouter>
+      <BrowserRouter>
+        <div className="App">
+          <SearchForm 
+                query={this.state.query} 
+                onChange={this.onSearchChange} 
+                performSearch = {this.performSearch}/>
+          <Nav 
+                searchTerms = {this.state.searchTerms}
+                handleClick = {this.handleNavClick}/>
+        </div>
+        <Switch>
+          <Route exact path='/' render={()=><Redirect to={`/${this.state.query}`} />} />
+          <Route  exact path={`/${this.state.searchTerms[0]}`} render={()=>
+            <PhotoContainer 
+                photos={this.state.photos} 
+                loading={this.state.loading} 
+                results={this.state.results} 
+                query={this.state.query}  />
+          } />
+          <Route  exact path={`/${this.state.searchTerms[1]}`} render={()=>
+            <PhotoContainer 
+                photos={this.state.photos} 
+                loading={this.state.loading} 
+                results={this.state.results} 
+                query={this.state.query}  />
+          } />
+          <Route  exact path={`/${this.state.searchTerms[2]}`} render={()=>
+            <PhotoContainer 
+              photos={this.state.photos} 
+              loading={this.state.loading} 
+              results={this.state.results} 
+              query={this.state.query} />
+          } />
+          <Route  exact path={`/${this.state.query}`} render={()=>
+            <PhotoContainer     
+              photos={this.state.photos}
+              loading={this.state.loading} 
+              results={this.state.results}  
+              query={this.state.query} />
+          } />
+          <Route component={ Error  } />
+          {this.state.results}!=true?<NotFound />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }

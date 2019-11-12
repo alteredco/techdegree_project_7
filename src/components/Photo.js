@@ -1,11 +1,18 @@
 import React from 'react';
 
 const Photo = props => {
-  const photoUrl = `https://farm${props.farm}.staticflickr.com/${props.server}/${props.photoId}_${props.secret}_m.jpg`
+  const {
+    farm,
+    server,
+    photoId,
+    secret,
+    name
+  }=props;
+  const photoUrl = `https://farm${farm}.staticflickr.com/${server}/${photoId}_${secret}_m.jpg`
   return (
     <React.Fragment>
     <li>
-    <img src={photoUrl} alt={props.name} />
+    <img src={photoUrl} alt={name} />
   </li>
   </React.Fragment>
   );

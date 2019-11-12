@@ -2,15 +2,23 @@ import React from 'react';
 import Photo from './Photo';
 import NotFound from './NotFound';
 
-const PhotoContainer =props => (
-      <div className="photo-container">
-          {
-            (props.loading)
-              ?<p>LOADING...</p>
-              : (props.results)? <h2>Results</h2>:<NotFound />
-          }
-        <ul>
-         {props.photos.map((photo, index) =>
+const PhotoContainer =props => {
+  const {
+    loading,
+    results,
+    photos,
+    query
+  } = props;
+
+  return (
+    <div className="photo-container">
+      {
+        (loading)
+          ?<p>LOADING...</p>
+          : (results)? <h2>Results for {(query)}</h2>:<NotFound />
+      }
+      <ul>
+        {photos.map((photo, index) =>
           <Photo 
             {...photo}
             key = {photo.id.toString()}
@@ -22,8 +30,9 @@ const PhotoContainer =props => (
             index={index}
           />
          )}
-        </ul>
-      </div>
-    )
+      </ul>
+    </div>
+   )
+}
 
 export default PhotoContainer;

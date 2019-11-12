@@ -1,11 +1,22 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 const SearchForm  = props => {
       const {
         query,
         onChange,
-        handleSubmit
+        performSearch,
+        history
       } = props;
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        performSearch(query);
+        let path = `/${query}`
+        history.push(path)
+        e.currentTarget.reset();
+      }
+
       return (
       <form className="search-form" onSubmit={handleSubmit} >
         <label className="is--hidden" htmlFor="search">Search</label>
@@ -19,4 +30,4 @@ const SearchForm  = props => {
       )
 };
 
-export default SearchForm;
+export default withRouter(SearchForm);
