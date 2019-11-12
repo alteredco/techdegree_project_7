@@ -10,13 +10,30 @@ Clone the Repo to start:
 git clone https://github.com/alteredco/techdegree_project_7
 ```
 
-Working version of this project can be found here:
-
 ---
 
 # Features:
 
+React image gallery app utilizing the Flickr API. With the help of this powerful "MVC" (Model, View, Controller) library, the app is built in the style of modern single page applications to keep it fast, modular, and in sync with current web development trends.
+
+No warnings or errors in console about unused/missing assets.
+Running npm start successfully launches the app.
+App is broken up into components.
+Provided CSS is used and the important aspects of the app generally resemble the mockups.
+React Router properly implemented.
+URLs correctly match routes.
+Clicking a nav link navigates user to new route and loads new data.
+Uses Flickr API correctly: API Keys and proper Photo source URLs.
+Data fetched from a "container" component that passes data down to presentation component via props.
+No console errors or warnings regarding unique "key" props.
+Key props passed to images.
+Submitting search data returns & displays results.
+
 **FOR EXCEEDS**
+
+App includes a 404-like error route that displays when a URL path does not match an existing route.
+App displays a loading indicator each time the app fetches new data on at least the search route.
+If no matches are found by the search, the app includes a message to tell the user there are no matches.
 
 `npm start` will run the app.
 
