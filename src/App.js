@@ -18,7 +18,7 @@ class App extends Component {
     photos: [],
     loading: true,
     results: false,
-    query: '',
+    query: 'moma',
     searchTerms: [
       'moma',
       'louvre',
