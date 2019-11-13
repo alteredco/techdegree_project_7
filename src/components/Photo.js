@@ -8,6 +8,8 @@ const Photo = props => {
     secret,
     name
   }=props;
+
+  /*Builds flickr url for photo from api data*/ 
   const photoUrl = `https://farm${farm}.staticflickr.com/${server}/${photoId}_${secret}_m.jpg`
   return (
     <React.Fragment>

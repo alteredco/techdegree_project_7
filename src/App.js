@@ -18,7 +18,7 @@ class App extends Component {
     photos: [],
     loading: true,
     results: false,
-    query: 'art gallery',
+    query: 'look up',
     searchTerms: [
       'moma',
       'louvre',
@@ -26,10 +26,13 @@ class App extends Component {
     ]
   }
 
+  /*Request data from API only after the App component has loaded */
   componentDidMount() {
     this.performSearch(this.state.query);
   }
 
+   /*Get data from Flickr API and check if there are results
+  @params {string} query- data request term for API*/
   performSearch = (query) => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apikey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(( response ) => {
@@ -56,10 +59,12 @@ class App extends Component {
     }
   }
 
+  /* Handle input into the search box and set query to input value.  Passed as a prop to the SearchForm component. @params {event} e - event */ 
   onSearchChange = e => {
     this.setState({ query: e.target.value } );
   }
 
+  /*Handle nav button click event, set query value to the search term of the button and send request data from API. Passed as a prop to the SearchForm component. @params {event} e - event*/ 
   handleNavClick = e => {
     e.preventDefault();
     this.setState({ query: e.target.text })
@@ -79,7 +84,9 @@ class App extends Component {
                 handleClick = {this.handleNavClick}/>
         </div>
         <Switch>
-          <Route exact path='/' render={()=><Redirect to={`/${this.state.query}`} />} />
+          <Route exact path='/' render={()=>
+            <Redirect to={`/${this.state.query}`} />
+            } />
           <Route  exact path={`/:query`} render={()=>
             <PhotoContainer     
               photos={this.state.photos}

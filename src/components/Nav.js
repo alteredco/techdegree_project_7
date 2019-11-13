@@ -12,9 +12,9 @@ const Nav = (props) =>  {
   return (
   <nav className="main-nav">
   <ul>
-    <li onClick={ handleClick }><NavLink to={`/${searchTerms[0]}`} >{searchTerms[0]}</NavLink></li>
-    <li onClick={ handleClick }><NavLink to={`/${searchTerms[1]}`} >{searchTerms[1]}</NavLink></li>
-    <li onClick={ handleClick }><NavLink to={`/${searchTerms[2]}`} >{searchTerms[2]}</NavLink></li>
+    { searchTerms.map( (searchTerm, index) => 
+      <li onClick={ handleClick } key={index.toString()}><NavLink  to={`/${searchTerm}`}>{searchTerm}</NavLink></li>
+    )}
   </ul>
 </nav>
   );

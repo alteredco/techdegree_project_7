@@ -40,6 +40,8 @@ a {
   padding: 0px 15px;
   border-radius: 0 0.35em 0.35em 0;
   cursor: pointer;
+  box-shadow: 5px 5px rgba(44, 78, 255, 0.701),
+    10px 10px rgba(167, 25, 255, 0.2), 15px 15px rgba(76, 12, 116, 0.1);
 }
 
 input {
@@ -51,6 +53,12 @@ input {
   border-right: none;
   border-radius: 0.35em 0 0 0.35em;
   outline: none;
+  box-shadow: 5px 5px rgba(44, 78, 255, 0.701),
+    10px 10px rgba(167, 25, 255, 0.2), 15px 15px rgba(76, 12, 116, 0.1);
+}
+
+input:hover {
+  background-color: #f6fcd5;
 }
 
 .main-nav li {
@@ -87,6 +95,8 @@ input {
   overflow: hidden;
   margin-bottom: 15px;
   border-radius: 0.35em;
+  box-shadow: 5px 5px rgba(44, 78, 255, 0.701),
+    10px 10px rgba(167, 25, 255, 0.2), 15px 15px rgba(76, 12, 116, 0.1);
 }
 
 .photo-container ul img {
@@ -101,6 +111,15 @@ input {
 
 .photo-container .not-found {
   width: 100%;
+}
+
+.not-found p {
+  color: #4c0c74;
+}
+
+.icon-gif {
+  font-size: 4em;
+  color: #4c0c74;
 }
 
 @media only screen and (max-width: 767px) {

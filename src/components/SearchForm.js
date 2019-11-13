@@ -9,6 +9,8 @@ const SearchForm  = props => {
         history
       } = props;
 
+      /*Handle input submit on click and add query to url path 
+      @params {event} e - event*/
       const handleSubmit = (e) => {
         e.preventDefault();
         performSearch(query);
