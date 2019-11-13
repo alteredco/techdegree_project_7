@@ -35,7 +35,7 @@ App includes a 404-like error route that displays when a URL path does not match
 App displays a loading indicator each time the app fetches new data on at least the search route.
 If no matches are found by the search, the app includes a message to tell the user there are no matches.
 
-`npm start` will run the app.
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

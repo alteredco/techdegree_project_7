@@ -18,7 +18,7 @@ class App extends Component {
     photos: [],
     loading: true,
     results: false,
-    query: 'moma',
+    query: 'art gallery',
     searchTerms: [
       'moma',
       'louvre',
@@ -80,28 +80,7 @@ class App extends Component {
         </div>
         <Switch>
           <Route exact path='/' render={()=><Redirect to={`/${this.state.query}`} />} />
-          <Route  exact path={`/${this.state.searchTerms[0]}`} render={()=>
-            <PhotoContainer 
-                photos={this.state.photos} 
-                loading={this.state.loading} 
-                results={this.state.results} 
-                query={this.state.query}  />
-          } />
-          <Route  exact path={`/${this.state.searchTerms[1]}`} render={()=>
-            <PhotoContainer 
-                photos={this.state.photos} 
-                loading={this.state.loading} 
-                results={this.state.results} 
-                query={this.state.query}  />
-          } />
-          <Route  exact path={`/${this.state.searchTerms[2]}`} render={()=>
-            <PhotoContainer 
-              photos={this.state.photos} 
-              loading={this.state.loading} 
-              results={this.state.results} 
-              query={this.state.query} />
-          } />
-          <Route  exact path={`/${this.state.query}`} render={()=>
+          <Route  exact path={`/:query`} render={()=>
             <PhotoContainer     
               photos={this.state.photos}
               loading={this.state.loading} 
