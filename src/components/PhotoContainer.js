@@ -14,7 +14,7 @@ const PhotoContainer =props => {
     <div className="photo-container">
       {
         (loading)
-          ?<p>LOADING...</p>
+          ?<h3>LOADING...</h3>
           : (results)? <h2>Results for {(query)}</h2>:<NotFound />
       }
       <ul>

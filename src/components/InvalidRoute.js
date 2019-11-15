@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Error = props => (
+const InvalidRoute = props => (
   <li className='not-found'>
     <i className="material-icons icon-gif">error_outline</i>
     <h3>What are you looking for?</h3>
@@ -8,4 +8,4 @@ const Error = props => (
   </li>
 );
 
-export default Error;
+export default InvalidRoute;

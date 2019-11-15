@@ -10,7 +10,7 @@ import {
 import SearchForm from './components/SearchForm';
 import Nav from './components/Nav';
 import PhotoContainer from './components/PhotoContainer';
-import Error from './components/Error';
+import InvalidRoute from './components/InvalidRoute';
 import NotFound from './components/NotFound';
 
 class App extends Component {
@@ -34,6 +34,9 @@ class App extends Component {
    /*Get data from Flickr API and check if there are results
   @params {string} query- data request term for API*/
   performSearch = (query) => {
+    this.setState({
+      loading:true
+    });
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apikey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(( response ) => {
       this.setState({
@@ -94,7 +97,7 @@ class App extends Component {
               results={this.state.results}  
               query={this.state.query} />
           } />
-          <Route component={ Error  } />
+          <Route component={ InvalidRoute  } />
           {this.state.results}!=true?<NotFound />
         </Switch>
       </BrowserRouter>
